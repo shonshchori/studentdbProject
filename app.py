@@ -1,17 +1,32 @@
 from flask import Flask, render_template, request
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms import StringField, SubmitField, DateField, SelectField, EmailField
+from wtforms.validators import DataRequired, Email
 
 import students_list
 
 # Create a Flask Instance
 app = Flask(__name__)
+
+# Add Database
+app.config['SQLALCHEMY_DATABASE_USI'] = 'mysql://root:7466@localhost/studentsdb'
+
+# Secret Key
 app.config['SECRET_KEY'] = "MySecretKey"
 
 # Create a Form Class
-class NamerForm(FlaskForm):
-    name = StringField("What's Your Name?", validators=[DataRequired()])
+class StudentForm(FlaskForm):
+    student_id = StringField("ID", validators=[DataRequired()])
+    first_name = StringField("First Name", validators=[DataRequired()])
+    last_name = StringField("Last Name", validators=[DataRequired()])
+    birth_date = DateField("Birth Date", validators=[DataRequired()])
+    email = EmailField("Email", validators=[DataRequired(), Email()])
+    address = StringField("Address", validators=[DataRequired()])
+    major = SelectField("Major",
+                        choices=[("Industrial Engineering", "Industrial Engineering"),
+                                 ("Civil Engineering", "Civil Engineering"),
+                                 ("Mechanic Engineering", "Mechanic Engineering"),
+                                 ("Electrical Engineering", "Electrical Engineering")], validate_choice=True)
     submit = SubmitField("Submit")
 
 # Create a route decorator
@@ -39,13 +54,34 @@ def page_not_found(e):
 def students():
     return render_template("students.html", students=students_list.students, columns=students_list.columns)
 
+
 # Students page
 @app.route('/submit', methods=['GET', 'POST'])
-def studentsubmit():
-    name = None
-    form = NamerForm()
+def student_submit():
+    student_id = None
+    first_name = None
+    last_name = None
+    birth_date = None
+    email = None
+    address = None
+    major = None
+    form = StudentForm()
     # Validate Form
     if form.validate_on_submit():
-        name = form.name.data
-        form.name.data = ''
-    return render_template("StudentSubmit.html", name=name, form=form)
+        student_id = form.student_id.data
+        first_name = form.first_name.data
+        last_name = form.last_name.data
+        birth_date = form.birth_date.data
+        email = form.email.data
+        address = form.address.data
+        major = form.major.data
+        form.student_id.data = ''
+        form.first_name.data = ''
+        form.last_name.data = ''
+        form.birth_date.data = ''
+        form.email.data = ''
+        form.address.data = ''
+        form.major.data = ''
+    return render_template("StudentSubmit.html",
+                           student_id=student_id, first_name=first_name, last_name=last_name, birth_date=birth_date,
+                           email=email, address=address, major=major, form=form)

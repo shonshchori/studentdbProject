@@ -2,19 +2,52 @@
 
 {% block content %}
 
-    <h1>You Can Submit a New Student Here!</h1>
-
-{% if name %}
-    <h1>Hello {{ name}} !!</h1>
+{% if student_id %}
+    <h1><u>Hello {{first_name}} {{last_name}}!!</u></h1>
+    <p><strong><u>ID:</u></strong> {{student_id}}</p>
+    <p><strong><u>Birth Date:</u></strong> {{birth_date}}</p>
+    <p><strong><u>Email:</u></strong> {{email}}</p>
+    <p><strong><u>Address:</u></strong> {{address}}</p>
+    <p><strong><u>Major:</u></strong> {{major}}</p>
 {% else %}
-    <h1>What's your name?</h1>
+    <h1>You Can Submit a New Student Here!</h1>
+    <h2>Please Enter Your Details:</h2>
     <br/>
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        {{ form.name.label }}
-        {{ form.name() }}
-        <br/>
-        {{ form.submit }}
-    </form>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                <!--The label from the StudentForm class-->
+                {{ form.student_id.label(class="form-label") }}
+                <!--The field from the StudentForm class-->
+                {{ form.student_id(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.first_name.label(class="form-label") }}
+                {{ form.first_name(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.last_name.label(class="form-label") }}
+                {{ form.last_name(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.birth_date.label(class="form-label") }}
+                {{ form.birth_date(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.email.label(class="form-label") }}
+                {{ form.email(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.address.label(class="form-label") }}
+                {{ form.address(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.major.label(class="form-label") }}
+                {{ form.major(class="form-control") }}
+            </div>
+            <br/>
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
 {% endif %}
+
 {% endblock %}
