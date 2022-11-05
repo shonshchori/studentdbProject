@@ -3,14 +3,15 @@
 {% block content %}
 
 {% if student_id %}
-    <h1><u>Hello {{first_name}} {{last_name}}!!</u></h1>
+    <h1><u>Thanks for signing up, {{first_name}} {{last_name}}!</u></h1>
+    <p>Your Details:</p>
     <p><strong><u>ID:</u></strong> {{student_id}}</p>
     <p><strong><u>Birth Date:</u></strong> {{birth_date}}</p>
     <p><strong><u>Email:</u></strong> {{email}}</p>
     <p><strong><u>Address:</u></strong> {{address}}</p>
     <p><strong><u>Major:</u></strong> {{major}}</p>
 {% else %}
-    <h1>You Can Submit a New Student Here!</h1>
+    <h1>You Can Sign Up Here!</h1>
     <h2>Please Enter Your Details:</h2>
     <br/>
         <form method="POST">

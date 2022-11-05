@@ -9,4 +9,4 @@ students = list()
 for student in my_cursor:
     students.append(student)
 
-columns = ["Birth date","Email","Address","Major"]
+columns = ['Birth Date', 'Email', 'Address', 'Major'] #this list used in "Students.html" page.

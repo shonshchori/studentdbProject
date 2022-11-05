@@ -3,6 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, DateField, SelectField, EmailField
 from wtforms.validators import DataRequired, Email
 
+import db_connection
 import students_list
 
 # Create a Flask Instance
@@ -82,6 +83,12 @@ def student_submit():
         form.email.data = ''
         form.address.data = ''
         form.major.data = ''
+
+        my_cursor = db_connection.mydb.cursor()
+        new_stud = (student_id, last_name, first_name, birth_date, email, address, major)
+        my_cursor.execute("INSERT INTO students VALUES(%s, '%s', '%s', '%s', '%s', '%s', '%s')" % new_stud)
+
+        db_connection.mydb.commit()
     return render_template("StudentSubmit.html",
                            student_id=student_id, first_name=first_name, last_name=last_name, birth_date=birth_date,
                            email=email, address=address, major=major, form=form)

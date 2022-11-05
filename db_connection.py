@@ -9,3 +9,10 @@ mydb = mysql.connector.connect(
     database="studentsdb",
     auth_plugin='mysql_native_password'
 )
+
+# my_cursor = mydb.cursor()
+#
+# my_cursor.execute("INSERT INTO students VALUES('123456789', 'Check', 'Checkidi',"
+#                   "'1995-01-01', 'thisischeck@gmail.com', 'Checks, Israel', 'Mechanic Engineering')")
+#
+# mydb.commit()
