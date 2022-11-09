@@ -100,7 +100,7 @@ def student_submit():
 
 @app.route('/my_grades', methods=['GET', 'POST'])
 def student_grades():
-    student_id = 313354672
+    student_id = None
     form = GradesForm()
     # Validate Form
     if form.validate_on_submit():
@@ -110,3 +110,11 @@ def student_grades():
     return render_template("student_profile.html",
                            grades=students_grades.get_grades(student_id=student_id),
                            grade_columns=students_grades.columns, form=form)
+
+
+@app.route('/checks', methods=['GET', 'POST'])
+def check_grades():
+    student_id = 313354672
+    return render_template("checks.html",
+                           grades=students_grades.get_grades(student_id=student_id),
+                           grade_columns=students_grades.columns)
