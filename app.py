@@ -1,17 +1,17 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, DateField, SelectField, EmailField
 from wtforms.validators import DataRequired, Email
 
 import db_connection
 import students_list
+import students_grades
 
 # Create a Flask Instance
 app = Flask(__name__)
 
 # Add Database
-app.config['SQLALCHEMY_DATABASE_USI'] = 'mysql://root:7466@localhost/studentsdb'
-
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:7466@localhost/our_users'
 # Secret Key
 app.config['SECRET_KEY'] = "MySecretKey"
 
@@ -28,6 +28,11 @@ class StudentForm(FlaskForm):
                                  ("Civil Engineering", "Civil Engineering"),
                                  ("Mechanic Engineering", "Mechanic Engineering"),
                                  ("Electrical Engineering", "Electrical Engineering")], validate_choice=True)
+    submit = SubmitField("Submit")
+
+
+class GradesForm(FlaskForm):
+    student_id = StringField("ID", validators=[DataRequired()])
     submit = SubmitField("Submit")
 
 # Create a route decorator
@@ -92,3 +97,16 @@ def student_submit():
     return render_template("StudentSubmit.html",
                            student_id=student_id, first_name=first_name, last_name=last_name, birth_date=birth_date,
                            email=email, address=address, major=major, form=form)
+
+@app.route('/my_grades', methods=['GET', 'POST'])
+def student_grades():
+    student_id = 313354672
+    form = GradesForm()
+    # Validate Form
+    if form.validate_on_submit():
+        student_id = form.student_id.data
+        form.student_id.data = ''
+
+    return render_template("student_profile.html",
+                           grades=students_grades.get_grades(student_id=student_id),
+                           grade_columns=students_grades.columns, form=form)
