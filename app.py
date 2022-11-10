@@ -3,6 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, DateField, SelectField, EmailField
 from wtforms.validators import DataRequired, Email
 
+import courseDetails
 import db_connection
 import students_list
 import gradesSheet
@@ -33,6 +34,10 @@ class StudentForm(FlaskForm):
 
 class GradesForm(FlaskForm):
     student_id = StringField("ID", validators=[DataRequired()])
+    submit = SubmitField("Submit")
+
+class CourseForm(FlaskForm):
+    course_id = StringField("course ID", validators=[DataRequired()])
     submit = SubmitField("Submit")
 
 # Create a route decorator
@@ -112,3 +117,18 @@ def grades_sheet():
     return render_template("grades_sheet.html",
                            grades=grades,
                            grade_columns=gradesSheet.columns, form=form)
+
+@app.route('/courses_database', methods=['GET', 'POST'])
+def courses_details():
+    course_id = None
+    course = None
+    form = CourseForm()
+    # Validate Form
+    if form.validate_on_submit():
+        course_id = form.course_id.data
+        form.course_id.data = ''
+        course = courseDetails.get_course(course_id=course_id)
+
+    return render_template("courses_database.html",
+                           course=course,
+                           course_columns=courseDetails.columns, form=form)
