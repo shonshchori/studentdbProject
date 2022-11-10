@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>Courses Database</title>
+{% if course %}
+    <center>
+    <h1>Courses Database:</h1>
+        <h3>Please Enter The course ID:</h3>
+        <br/>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div align="left" class="col-md-6">
+                    <!--The label from the CourseForm class-->
+                    {{ form.course_id.label(class="form-label") }}
+                    <!--The field from the CourseForm class-->
+                    {{ form.course_id(class="form-control") }}
+                </div>
+                </br>
+                {{ form.submit(class="btn btn-primary") }}
+            </form>
+        </br>
+        </br>
+    <h3><u>{{ course[0][1] }}</u></h3>
+    <ul>
+        <h5><strong>ID:</strong> {{course[0][0]}} </h5>
+        <h5><strong> {{course[0][2]}}</strong> Credit Points</h5></br>
+    </ul>
+    </center>
+{% else %}
+    <center>
+    <h1>Courses Database:</h1>
+    <h3>Please Enter The course ID:</h3>
+    <br/>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div align="left" class="col-md-6">
+                <!--The label from the CourseForm class-->
+                {{ form.course_id.label(class="form-label") }}
+                <!--The field from the CourseForm class-->
+                {{ form.course_id(class="form-control") }}
+            </div>
+            </br>
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
+    </center>
+{% endif %}
+
+{% endblock %}
