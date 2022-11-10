@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>Grades Sheet</title>
+{% if grades %}
+    <h1><u>Your grades are:</u></h1>
+    <ul>
+      {% for grade in grades %} <! Prints the student's header: ID and name>
+        <li><h5><u>{{grade[1]}}</u></h5></li>
+        {% for item in range(0,4) %} <! Prints the student's details: birth date, email, address and major>
+          <strong> {{grade_columns[item]}}:</strong> {{grade[item +2]}} </br>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+{% else %}
+<center>
+    <h1>Grades Sheet:</h1>
+    <h3>Please Enter Your Details:</h3>
+    <br/>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div align="left" class="col-md-6">
+                <!--The label from the GradesForm class-->
+                {{ form.student_id.label(class="form-label") }}
+                <!--The field from the GradesForm class-->
+                {{ form.student_id(class="form-control") }}
+            </div>
+            </br>
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
+    </center>
+{% endif %}
+
+{% endblock %}

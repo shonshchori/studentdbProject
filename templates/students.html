@@ -1,16 +1,14 @@
 {% extends 'base.html' %}
-
 {% block content %}
+<title>Our Students</title>
+<h1><u>Our students are:</u></h1>
 
-  <h1><u>Our students are:</u></h1>
-
-  <ul>
-  {% for student in students %} <! Prints the student's header: ID and name>
-    <li><h3><u>ID: {{student[0]}}, {{ student[1] }} {{ student[2] }}</u></h3></li>
-    {% for item in range(0,4) %} <! Prints the student's details: birth date, email, address and major>
-      <strong> {{columns[item]}}:</strong> {{ student[item +3] }}</br>
-    {% endfor %}
+<ul>
+{% for student in students %} <! Prints the student's header: ID and name>
+  <li><h3><u>ID: {{student[0]}}, {{ student[1] }} {{ student[2] }}</u></h3></li>
+  {% for item in range(0,4) %} <! Prints the student's details: birth date, email, address and major>
+    <strong> {{columns[item]}}:</strong> {{ student[item +3] }}</br>
   {% endfor %}
-  </ul>
-
+{% endfor %}
+</ul>
 {% endblock %}

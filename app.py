@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired, Email
 
 import db_connection
 import students_list
-import students_grades
+import gradesSheet
 
 # Create a Flask Instance
 app = Flask(__name__)
@@ -98,23 +98,17 @@ def student_submit():
                            student_id=student_id, first_name=first_name, last_name=last_name, birth_date=birth_date,
                            email=email, address=address, major=major, form=form)
 
-@app.route('/my_grades', methods=['GET', 'POST'])
-def student_grades():
+@app.route('/grades_sheet', methods=['GET', 'POST'])
+def grades_sheet():
     student_id = None
+    grades = None
     form = GradesForm()
     # Validate Form
     if form.validate_on_submit():
         student_id = form.student_id.data
         form.student_id.data = ''
+        grades = gradesSheet.get_grades(student_id=student_id)
 
-    return render_template("student_profile.html",
-                           grades=students_grades.get_grades(student_id=student_id),
-                           grade_columns=students_grades.columns, form=form)
-
-
-@app.route('/checks', methods=['GET', 'POST'])
-def check_grades():
-    student_id = 313354672
-    return render_template("checks.html",
-                           grades=students_grades.get_grades(student_id=student_id),
-                           grade_columns=students_grades.columns)
+    return render_template("grades_sheet.html",
+                           grades=grades,
+                           grade_columns=gradesSheet.columns, form=form)
