@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>Grade Submit</title>
+{% if student_id %}
+    <center>
+    <h1>Grade Submit:</h1>
+        <h3>Please Enter The Next Grade Details:</h3>
+        <br/>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div align="left" class="col-md-6">
+                    <!-- The label from the GradeSubmitForm class -->
+                    {{form.student_id.label(class ="form-label")}}
+                    <!-- The field from the GradeSubmitForm class -->
+                    {{form.student_id(class ="form-control")}}
+                    {{form.course_id.label( class ="form-label")}}
+                    {{form.course_id( class ="form-control")}}
+                    {{form.year_taken.label( class ="form-label")}}
+                    {{form.year_taken( class ="form-control")}}
+                    {{form.grade.label( class ="form-label")}}
+                    {{form.grade( class ="form-control")}}
+                </div>
+                </br>
+                {{ form.submit(class="btn btn-primary") }}
+            </form>
+        </br>
+        </br>
+    <ul>
+        <h3><u><strong>The grade submitted Successfully!</strong></u></h3></br>
+        <h5><strong>Student ID:</strong> {{ student_id }}, <strong> Course ID: </strong> {{ course_id }}</h5>
+        <h5><strong> Year Taken: </strong> {{ year_taken }}, <strong> Grade: </strong> {{ grade }}</h5>
+    </ul>
+    </center>
+{% else %}
+    <center>
+    <h1>Grade Submit:</h1>
+    <h3>Please Enter The Grade Details:</h3>
+    <br/>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div align="left" class="col-md-6">
+                <!-- The label from the GradeSubmitForm class -->
+                {{form.student_id.label(class ="form-label")}}
+                <!-- The field from the GradeSubmitForm class -->
+                {{form.student_id(class ="form-control")}}
+                {{form.course_id.label( class ="form-label")}}
+                {{form.course_id( class ="form-control")}}
+                {{form.year_taken.label( class ="form-label")}}
+                {{form.year_taken( class ="form-control")}}
+                {{form.grade.label( class ="form-label")}}
+                {{form.grade( class ="form-control")}}
+            </div>
+            </br>
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
+    </center>
+{% endif %}
+
+{% endblock %}

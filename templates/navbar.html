@@ -10,6 +10,9 @@
           <a class="nav-link" href="{{ url_for('student_submit') }}">Student Submit</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('grade_submit') }}">Grade Submit</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="{{ url_for('grades_sheet') }}">Grades Sheet</a>
         </li>
         <li class="nav-item">
@@ -21,6 +24,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="{{ url_for('student_submit') }}">Student Submit</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('grade_submit') }}">Grade Submit</a></li>
             <li><a class="dropdown-item" href="{{ url_for('grades_sheet') }}">Grades Sheet</a></li>
             <li><a class="dropdown-item" href="{{ url_for('students') }}">Students</a></li>
             <li><a class="dropdown-item" href="{{ url_for('courses_details') }}">Courses Database</a></li>

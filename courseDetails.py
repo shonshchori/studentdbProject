@@ -14,7 +14,6 @@ def get_course(course_id):
 
 columns = ['Course Name', 'Credit Points']
 
-print(get_course(4210110))
 # this list used in "Students.html" page.
 # Places in the list:
 # Course Name - 0, Credit Points - 1

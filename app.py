@@ -1,8 +1,9 @@
 from flask import Flask, render_template
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, DateField, SelectField, EmailField
+from wtforms import StringField, SubmitField, DateField, SelectField, EmailField, IntegerField
 from wtforms.validators import DataRequired, Email
 
+import submit_grade
 import courseDetails
 import db_connection
 import students_list
@@ -34,6 +35,16 @@ class StudentForm(FlaskForm):
 
 class GradesForm(FlaskForm):
     student_id = StringField("Student ID", validators=[DataRequired()])
+    submit = SubmitField("Submit")
+
+
+class GradeSubmitForm(FlaskForm):
+    student_id = StringField("Student ID", validators=[DataRequired()])
+    course_id = StringField("Course ID", validators=[DataRequired()])
+    year_taken = SelectField("Year Taken",
+                             choices=[("1", "1"), ("2", "2"),
+                                      ("3", "3"), ("4", "4")], validate_choice=True)
+    grade = IntegerField("Grade", validators=[DataRequired()])
     submit = SubmitField("Submit")
 
 
@@ -133,3 +144,28 @@ def courses_details():
     return render_template("courses_database.html",
                            course=course,
                            course_columns=courseDetails.columns, form=form)
+
+@app.route('/grade_submit', methods=['GET', 'POST'])
+def grade_submit():
+    student_id = None
+    course_id = None
+    year_taken = None
+    grade = None
+    form = GradeSubmitForm()
+    # Validate Form
+    if form.validate_on_submit():
+        student_id = form.student_id.data
+        course_id = form.course_id.data
+        year_taken = form.year_taken.data
+        grade = form.grade.data
+        form.student_id.data = ''
+        form.course_id.data = ''
+        form.year_taken.data = ''
+        form.grade.data = ''
+        submit_grade.submit_grade(student_id=student_id,course_id=course_id,
+                                  year_taken=year_taken, grade=grade)
+
+    return render_template("submit_grade.html",
+                           student_id=student_id, course_id=course_id,
+                           year_taken=year_taken, grade=grade,
+                           course_columns=submit_grade.columns, form=form)
