@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>Course Submit</title>
+{% if course_id %}
+    <center>
+    <h1>Course Submit:</h1>
+        <h3>Please Enter The Next Course Details:</h3>
+        <br/>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div align="left" class="col-md-6">
+                    <!-- The label from the GradeSubmitForm class -->
+                    {{form.course_id.label(class ="form-label")}}
+                    <!-- The field from the GradeSubmitForm class -->
+                    {{form.course_id(class ="form-control")}}
+                    {{form.course_name.label( class ="form-label")}}
+                    {{form.course_name( class ="form-control")}}
+                    {{form.credit_points.label( class ="form-label")}}
+                    {{form.credit_points( class ="form-control")}}
+                </div>
+                </br>
+                {{ form.submit(class="btn btn-primary") }}
+            </form>
+        </br>
+        </br>
+    <ul>
+        <h3><u><strong>The course submitted Successfully!</strong></u></h3></br>
+        <h5><strong>Course ID:</strong> {{ course_id }}, <strong> Course name: </strong> {{ course_name }}</h5>
+        <h5><strong></strong> {{ credit_points }} <strong> Credit Points</strong></h5>
+    </ul>
+    </center>
+{% else %}
+    <center>
+    <h1>Course Submit:</h1>
+    <h3>Please Enter The Course Details:</h3>
+    <br/>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div align="left" class="col-md-6">
+                <!-- The label from the GradeSubmitForm class -->
+                {{form.course_id.label(class ="form-label")}}
+                <!-- The field from the GradeSubmitForm class -->
+                {{form.course_id(class ="form-control")}}
+                {{form.course_name.label( class ="form-label")}}
+                {{form.course_name( class ="form-control")}}
+                {{form.credit_points.label( class ="form-label")}}
+                {{form.credit_points( class ="form-control")}}
+            </div>
+            </br>
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
+    </center>
+{% endif %}
+
+{% endblock %}

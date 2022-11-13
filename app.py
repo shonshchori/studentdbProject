@@ -3,11 +3,12 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, DateField, SelectField, EmailField, IntegerField
 from wtforms.validators import DataRequired, Email
 
-import submit_grade
-import courseDetails
 import db_connection
 import students_list
 import gradesSheet
+import submit_course
+import submit_grade
+import courseDetails
 
 # Create a Flask Instance
 app = Flask(__name__)
@@ -50,6 +51,13 @@ class GradeSubmitForm(FlaskForm):
 
 class CourseForm(FlaskForm):
     course_id = StringField("course ID", validators=[DataRequired()])
+    submit = SubmitField("Submit")
+
+
+class CourseSubmitForm(FlaskForm):
+    course_id = StringField("ID", validators=[DataRequired()])
+    course_name = StringField("Name", validators=[DataRequired()])
+    credit_points = StringField("Credit Points", validators=[DataRequired()])
     submit = SubmitField("Submit")
 
 # Create a route decorator
@@ -167,5 +175,26 @@ def grade_submit():
 
     return render_template("submit_grade.html",
                            student_id=student_id, course_id=course_id,
-                           year_taken=year_taken, grade=grade,
-                           course_columns=submit_grade.columns, form=form)
+                           year_taken=year_taken, grade=grade, form=form)
+
+
+@app.route('/course_submit', methods=['GET', 'POST'])
+def course_submit():
+    course_id = None
+    course_name = None
+    credit_points = None
+    form = CourseSubmitForm()
+    # Validate Form
+    if form.validate_on_submit():
+        course_id = form.course_id.data
+        course_name = form.course_name.data
+        credit_points = form.credit_points.data
+        form.course_id.data = ''
+        form.course_name.data = ''
+        form.credit_points.data = ''
+        submit_course.submit_course(course_id=course_id, course_name=course_name,
+                                    credit_points=credit_points)
+
+    return render_template("submit_course.html",
+                           course_id=course_id, course_name=course_name,
+                           credit_points=credit_points, form=form)
