@@ -7,27 +7,35 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('student_submit') }}">Student Submit</a>
+          <a class="nav-link" href="{{ url_for('students') }}">Our Students</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('grade_submit') }}">Grade Submit</a>
+          <a class="nav-link" href="{{ url_for('student_submit') }}">Student Submit</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('grades_sheet') }}">Grades Sheet</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('students') }}">Our Students</a>
+          <a class="nav-link" href="{{ url_for('grade_submit') }}">Grade Submit</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('course_submit') }}">Course Submit</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('courses_details') }}">Course Database</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="{{ url_for('student_submit') }}">Student Submit</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('grade_submit') }}">Grade Submit</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('grades_sheet') }}">Grades Sheet</a></li>
             <li><a class="dropdown-item" href="{{ url_for('students') }}">Students</a></li>
             <li><a class="dropdown-item" href="{{ url_for('courses_details') }}">Courses Database</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('grades_sheet') }}">Grades Sheet</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('student_submit') }}">Student Submit</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('grade_submit') }}">Grade Submit</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('course_submit') }}">Course Submit</a></li>
+
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
