@@ -17,6 +17,7 @@ def get_grades(student_id):
         grades.append(grade)
     return grades
 
+
 columns = ['Course ID', 'Credit Points', 'Grade', 'Year Taken']
 # this list used in "Students.html" page.
 # Places in the list:

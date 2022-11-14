@@ -2,6 +2,9 @@
 {% block content %}
 <title>Grades Sheet</title>
 {% if grades %}
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button class="btn btn-primary me-md-2" type="button" href="{{ url_for('grades_sheet') }}">Back</button>
+        </div>
     <h1><u>Your grades are:</u></h1>
     <ul>
       {% for grade in grades %} <! Prints the student's header: ID and name>
@@ -11,6 +14,10 @@
         {% endfor %}
       {% endfor %}
     </ul>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button class="btn btn-primary" type="button" href="{{ url_for('grades_sheet') }}">Back</button>
+        </div>
+    </br>
 {% else %}
 <center>
     <h1>Grades Sheet:</h1>

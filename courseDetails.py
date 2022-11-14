@@ -17,3 +17,11 @@ columns = ['Course Name', 'Credit Points']
 # this list used in "Students.html" page.
 # Places in the list:
 # Course Name - 0, Credit Points - 1
+
+
+def courses_db():
+    my_cursor.execute("SELECT * FROM courses")
+    course = list()
+    for item in my_cursor:
+        course.append((item[0], item[1]))
+    return course

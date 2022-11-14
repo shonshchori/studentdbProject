@@ -41,7 +41,9 @@ class GradesForm(FlaskForm):
 
 class GradeSubmitForm(FlaskForm):
     student_id = StringField("Student ID", validators=[DataRequired()])
-    course_id = StringField("Course ID", validators=[DataRequired()])
+    # course_id = StringField("Course ID", validators=[DataRequired()])
+    course_id = SelectField("Course",
+                            choices=courseDetails.courses_db(), validate_choice=True)
     year_taken = SelectField("Year Taken",
                              choices=[("1", "1"), ("2", "2"),
                                       ("3", "3"), ("4", "4")], validate_choice=True)
