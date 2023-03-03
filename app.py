@@ -117,7 +117,7 @@ def student_submit():
         form.major.data = ''
 
         my_cursor = db_connection.mydb.cursor()
-        new_stud = (student_id, last_name, first_name, birth_date, email, address, major)
+        new_stud = (student_id, first_name,last_name,  birth_date, email, address, major)
         my_cursor.execute("INSERT INTO students VALUES(%s, '%s', '%s', '%s', '%s', '%s', '%s')" % new_stud)
 
         db_connection.mydb.commit()
