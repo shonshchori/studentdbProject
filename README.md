@@ -39,23 +39,28 @@ Below are some screenshots of the application:
 
 ### Student Submit Page
 
-![Student Submit Page](screenshots/student_submit.png)
+![Student Submit Page](https://github.com/shonshchori/studentdbProject/blob/65a27af8d31d1327eca0febf0b7ce195371384f6/student%20submit.png)
+| :--: |
 
 ### Grade Submit Page
 
-![Grade Submit Page](screenshots/grade_submit.png)
+![Grade Submit Page](https://github.com/shonshchori/studentdbProject/blob/65a27af8d31d1327eca0febf0b7ce195371384f6/Grade%20Submit.png)
+| :--: |
 
 ### Grades Sheet Page
 
-![Grades Sheet Page](screenshots/grades_sheet.png)
+![Grades Sheet Page](https://github.com/shonshchori/studentdbProject/blob/65a27af8d31d1327eca0febf0b7ce195371384f6/Grades%20Sheet.png)
+| :--: |
 
 ### Averages Page
 
-![Averages Page](screenshots/averages.png)
+![Averages Page](https://github.com/shonshchori/studentdbProject/blob/65a27af8d31d1327eca0febf0b7ce195371384f6/Averages.png)
+| :--: |
 
 ### MySQL Screenshot
 
-![MySQL Screenshot](screenshots/mysql.png)
+![MySQL Screenshot](https://github.com/shonshchori/studentdbProject/blob/65a27af8d31d1327eca0febf0b7ce195371384f6/mySQL.png)
+| :--: |
 
 ## Conclusion
 
