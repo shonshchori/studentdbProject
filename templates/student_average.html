@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>Avrages</title>
+{% if average %}
+    {% if average[0][0] == None %}
+        <center><h2>The ID you entered does not exist in the system. please try again.</u></h2></center></br></br>
+    {%  else %}
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <a class="btn btn-outline-dark" type="button" href="{{ url_for('student_average') }}">Back</a>
+          <a class="btn btn-secondary me-md-2" type="button" href="{{ url_for('index') }}">Home</a>
+        </div>
+    <h3>The Average for Student ID <u>{{ student_id }}</u>:</h3>
+
+          <h5><strong> {{average_columns[0]}}:</strong> {{student_id}}</br>
+          <strong> {{average_columns[1]}}:</strong> {{year}} </br>
+          <strong> {{average_columns[2]}}:</strong> {{"%.3f" % average[0][0]}}  </h5></br></br></br></br>
+    {% endif %}
+
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <a class="btn btn-secondary" type="button" href="{{ url_for('student_average') }}">Back</a>
+        </div>
+    </br>
+{% else %}
+<center>
+    <h1>Student Averages</h1>
+    <h3>Please Enter Your Details:</h3>
+    <br/>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div align="left" class="col-md-6">
+                <!--The label from the GradesForm class-->
+                {{ form.student_id.label(class="form-label") }}
+                <!-- The field from the GradeSubmitForm class -->
+                {{form.student_id(class ="form-control")}}
+                <!-- The label from the GradeSubmitForm class -->
+                {{form.year.label(class ="form-label")}}
+                <!--The field from the GradesForm class-->
+                {{ form.year(class="form-control") }}
+            </div>
+            </br>
+            {{ form.submit(class="btn btn-secondary") }}
+        </form>
+    </center>
+{% endif %}
+
+{% endblock %}

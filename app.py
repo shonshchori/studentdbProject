@@ -4,6 +4,7 @@ from wtforms import StringField, SubmitField, DateField, SelectField, EmailField
 from wtforms.validators import DataRequired, Email
 
 import db_connection
+import studentAverage
 import students_list
 import gradesSheet
 import submit_course
@@ -60,6 +61,14 @@ class CourseSubmitForm(FlaskForm):
     course_id = StringField("ID", validators=[DataRequired()])
     course_name = StringField("Name", validators=[DataRequired()])
     credit_points = StringField("Credit Points", validators=[DataRequired()])
+    submit = SubmitField("Submit")
+
+class AvrageForm(FlaskForm):
+    student_id = StringField("Student ID", validators=[DataRequired()])
+    year = SelectField("Year Taken",
+                             choices=[("1", "1"), ("2", "2"),
+                                      ("3", "3"), ("4", "4"),
+                                      ("Total", "Total")], validate_choice=True)
     submit = SubmitField("Submit")
 
 # Create a route decorator
@@ -200,3 +209,21 @@ def course_submit():
     return render_template("submit_course.html",
                            course_id=course_id, course_name=course_name,
                            credit_points=credit_points, form=form)
+
+@app.route('/averages', methods=['GET', 'POST'])
+def student_average():
+    student_id = None
+    year = None
+    average = None
+    form = AvrageForm()
+    # Validate Form
+    if form.validate_on_submit():
+        student_id = form.student_id.data
+        year = form.year.data
+        form.student_id.data = ''
+        form.year.data = ''
+        average = studentAverage.get_average(student_id=student_id, year=year)
+
+    return render_template("student_average.html",
+                           student_id=student_id, year=year, average=average,
+                           average_columns=studentAverage.columns, form=form)
