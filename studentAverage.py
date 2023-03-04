@@ -4,8 +4,13 @@ import db_connection
 
 my_cursor = db_connection.mydb.cursor()
 def get_average(student_id, year):
-
-    my_cursor.execute('''SELECT SUM(courses.creditPoints*grades.grade)/SUM(courses.creditPoints)
+    if year in ("1","2","3","4"):
+        my_cursor.execute('''SELECT SUM(courses.creditPoints*grades.grade)/SUM(courses.creditPoints)
+                       FROM courses INNER JOIN studentpersonal AS grades
+                       WHERE (grades.courseId = courses.id AND grades.id = %s AND yearTaken = %s)''' % (student_id, year))
+        print(year)
+    else:
+        my_cursor.execute('''SELECT SUM(courses.creditPoints*grades.grade)/SUM(courses.creditPoints)
                FROM courses INNER JOIN studentpersonal AS grades
                WHERE (grades.courseId = courses.id AND grades.id = %s)''' % student_id)
 
